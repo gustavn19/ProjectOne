@@ -21,8 +21,9 @@ Created on Thu Oct 28 13:37:46 2021
 #	
 import numpy as np
 
-data = testData = np.array([[1,2,3],[1,2,3],[52,2,52]])
-statistic = testStat = "Mean Cold Growth Rate"
+#TestData
+#data = testData = np.array([[1,2,3],[1,2,3],[52,2,52]])
+#statistic = testStat = "Mean Cold Growth Rate"
 
 temp = data[:,0]
 growth_Rate = data[:,1]
