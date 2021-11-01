@@ -17,29 +17,44 @@ Created on Thu Oct 28 13:37:46 2021
 #	Og det at loade filer
 
 #Data Statistics Function Nikolaj
-#	Man skal kunne (numpy) funktioner der beregner middelværdi m.m. ud fra en matrix
+#	Man skal kunne (numpuy) funktioner der beregner middelværdi m.m. ud fra en matrix
 #	
 import numpy as np
 
-data = testData = np.array([[1, 2, 3], [1, 2, 3], [52, 2, 52]])
+data = testData = np.array([[1,2,3],[1,2,3],[52,2,52]])
 statistic = testStat = "Mean Cold Growth Rate"
 
-temp = data[:, 0]
-growth_Rate = data[:, 1]
-bacteria = data[:, 2]
+temp = data[:,0]
+growth_Rate = data[:,1]
+bacteria = data[:,2]
 
-rows, col = np.shape(data)
+rows,col = np.shape(data) 
 
-statStr = np.array(["Mean Temperature", "Mean Growth Rate", "Std Temperature", "Std Growth Rate",
-                    "Rows", "Mean Cold Growth Rate", "Mean Hot Growth Rate"])
-statFlo = np.array([np.mean(temp), np.mean(growth_Rate), np.std(temp), np.std(growth_Rate),
-                    rows, np.mean(temp[temp< 20]), np.mean(temp[temp> 50])])
+statStr = np.array(["Mean Temperature","Mean Growth Rate","Std Temperature","Std Growth Rate",
+                    "Rows","Mean Cold Growth Rate","Mean Hot Growth Rate"])
+statFlo = np.array([np.mean(temp),np.mean(growth_Rate),np.std(temp),np.std(growth_Rate),
+                    rows,np.mean(temp[temp<20]),np.mean(temp[temp>50])])
+(statStr==statistic)*statFlo
 
 #array med den efterspurgte statistiske værdi
 expectedStat = ((statStr==statistic)*statFlo)
 
 print(statFlo)
 print(expectedStat[expectedStat!=0][0])
+
+
+
+
+
+#mean_Temperature
+#mean_Growth_Rate
+#std_Temperature
+#std_Growth_Rate
+#rows
+#mean_Cold_Growth_Rate
+#mean_Hot_Growth_Rate
+
+
 
 
 
