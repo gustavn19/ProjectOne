@@ -1,20 +1,58 @@
 #Project 1: Bakterie-Dataanalyse
 
-#Main script
-#	Laves til sidst
-#	
 
-#Data Load Function Gustav Giraf
-#	Leg lidt med matricer (index, muligvis slicing)
-#	Og det at loade filer
+#Imports:
+import numpy as np
 
-#Data Statistics Function Nikolaj Næsehorn
-#	Man skal kunne (numpuy) funktioner der beregner middelværdi m.m. ud fra en matrix
-#	
+
+
+def dataLoad(filename):
+
+    return data
+
+
+
+#s214644
+def dataStatistics(data, statistic):
+    """
+    Parameters
+    ----------
+    data: Nx3 matrix with colums temperature, groth rate and bacteria.
+    statistic: required statistical scalar.
+
+    Returns
+    -------
+    Scalar, the result of the statistical measurement.  
+    """
+    temp = data[:,0]
+    growth_Rate = data[:,1]
+    bacteria = data[:,2]
+
+    rows, col = np.shape(data) 
+
+    statStr = np.array(["Mean Temperature", "Mean Growth Rate", "Std Temperature", "Std Growth Rate",
+                    "Rows", "Mean Cold Growth Rate", "Mean Hot Growth Rate"])
+
+    statFlo = np.array([np.mean(temp), np.mean(growth_Rate), np.std(temp), np.std(growth_Rate),
+                    rows, np.mean(temp[temp<20]), np.mean(temp[temp>50])])
+
+    #array med den efterspurgte statistiske værdi
+    expectedStat = ((statStr==statistic)*statFlo)
+
+    try:
+        result = expectedStat[expectedStat!=0][0]
+    except IndexError:
+        result = 0.0
+    finally:
+        return result
+
 
 #Data Plot Function Benjamin Bjørn
 #	Grafer
-#	
+
+def dataPlot(data):
+    return
+
 
 
 
