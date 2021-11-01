@@ -17,12 +17,13 @@ Created on Thu Oct 28 13:37:46 2021
 #	Og det at loade filer
 
 #Data Statistics Function Nikolaj
-#	Man skal kunne (numpuy) funktioner der beregner middelværdi m.m. ud fra en matrix
+#	Man skal kunne (numpy) funktioner der beregner middelværdi m.m. ud fra en matrix
 #	
 import numpy as np
 
-data = testData = np.array([[1,2,3],[1,2,3],[52,2,52]])
-statistic = testStat = "Mean Cold Growth Rate"
+#   testData
+# data = testData = np.array([[1,2,3],[1,2,3],[52,2,52]])
+# statistic = testStat = "Mean Cold Growth Rate"
 
 temp = data[:,0]
 growth_Rate = data[:,1]
@@ -41,19 +42,6 @@ expectedStat = ((statStr==statistic)*statFlo)
 
 print(statFlo)
 print(expectedStat[expectedStat!=0][0])
-
-
-
-
-
-#mean_Temperature
-#mean_Growth_Rate
-#std_Temperature
-#std_Growth_Rate
-#rows
-#mean_Cold_Growth_Rate
-#mean_Hot_Growth_Rate
-
 
 
 
