@@ -35,7 +35,6 @@ statStr = np.array(["Mean Temperature","Mean Growth Rate","Std Temperature","Std
                     "Rows","Mean Cold Growth Rate","Mean Hot Growth Rate"])
 statFlo = np.array([np.mean(temp),np.mean(growth_Rate),np.std(temp),np.std(growth_Rate),
                     rows,np.mean(temp[temp<20]),np.mean(temp[temp>50])])
-(statStr==statistic)*statFlo
 
 #array med den efterspurgte statistiske værdi
 expectedStat = ((statStr==statistic)*statFlo)
