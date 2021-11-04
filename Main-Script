@@ -1,11 +1,22 @@
 #Project 1: Bakterie-Dataanalyse
+#imports
 
 
-#Imports:
 import numpy as np
+import warnings
 
 
 def dataLoad(filename):
+    """
+    Parameters
+    ---------
+    filename: Name of file containing Nx3-matrix
+
+    Returns
+    -------
+    Nx3-Matrix but filtered (compromised rows are excluded)
+    """
+
 
     return data
 
@@ -30,9 +41,10 @@ def dataStatistics(data, statistic):
 
     statStr = np.array(["mean temperature","mean growth rate","std temperature","std growth rate",
                     "rows","mean cold growth rate","mean hot growth rate"])
-
-    statFlo = np.array([np.mean(temp), np.mean(growth_Rate), np.std(temp), np.std(growth_Rate),
-                    rows, np.mean(temp[temp<20]), np.mean(temp[temp>50])])
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore')
+        statFlo = np.array([np.mean(temp), np.mean(growth_Rate), np.std(temp), np.std(growth_Rate),
+                            rows, np.mean(temp[temp<20]), np.mean(temp[temp>50])])
 
     #sikkerhedsnet for hvis parameteren statistic har en udefineret værdi
     if not np.any((statStr==statistic.lower())):
@@ -50,19 +62,28 @@ def dataStatistics(data, statistic):
         return result
 
 
-#Data Plot Function Benjamin Bjørn
-#	Grafer
-
 def dataPlot(data):
+    """
+    Parameters
+    __________
+    data : N x 3 - Matrix
+
+    Returns:
+    --------
+    None (displays plots)
+    """
+
+
+
     return
 
 
 
-
+#Initial Statements:
 quit = False
 filter = False
 
-#Program loop
+#Program loop:
 while not quit:
     print(" 1. Load data.\n",
            "2. Filter data.\n",
@@ -84,16 +105,16 @@ while not quit:
         #dataLoad
         #print("What is the filename: ")
         data = testData = np.array([[1,2,3],[2,4,2],[19,20,3],[10,2,1],[30,20,4],[10,20,3],[10,2,1]])
-        rows = 3
+        rows = 7
         #file = input()
         #dataLoad(file)
 
 
     elif number == 2:
         #Filter
-        print('1. Filter for Bacteria type.\n',
-              '2. A range filter for Growth Rate.\n'
-              'Choose: ')
+        print(' 1. Filter for Bacteria type.\n',
+               '2. A range filter for Growth Rate.\n'
+               'Choose: ')
         filterInput = input()
         #Skkerhedsnet for input:
         try:
@@ -105,16 +126,17 @@ while not quit:
         if filterNumber == 1:
             print("Limiting data to one bacteria-type. Type which.\n",":")
             bacteriaInput = input() 
-            print(data)
+
             data = np.delete(data,(np.arange(0,rows)[data[:,2]!=int(bacteriaInput)]),0)
-            print(data)
+            print("efter",data)
         elif filterNumber == 2:
             print("Filter fo growth rate from: ")
             fromFilter = input()
             print("to:")
             toFilter = input()
 
-            data = np.delete(np.delete(data,(np.arange(0,6)[data[:,1]>fromFilter]),0),(np.arange(0,6)[data[:,1]<toFilter]),0)
+            data = np.delete(np.delete(data,(np.arange(0,rows)[data[:,1]>int(toFilter)]),0),(np.arange(0,rows)[data[:,1]<int(fromFilter)]),0)
+            print("efter", data)
         else:
             print("Wrong input. You must type a number between 1 and 2!")
 
@@ -127,7 +149,7 @@ while not quit:
             output = dataStatistics(data, statistic)
             print(statistic[0].upper()+statistic[1:].lower(),":",output)
         except NameError:
-            print("You havn't loaded any data.")
+            print("You have not loaded any data yet!")
 
     elif number == 4:
         #Generate plots
