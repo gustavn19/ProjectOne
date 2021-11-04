@@ -22,7 +22,7 @@ Created on Thu Oct 28 13:37:46 2021
 import numpy as np
 
 #   testData
-data = testData = np.array([[1,2,3],[1,2,3],[52,2,52]])
+data = testData = np.array([[1,2,3],[1,2,3],[52,2,52],[1,2,4],[9,10,11],[2,3,4]])
 statistic = testStat = "Std Growth Rate"
 
 temp = data[:,0]
@@ -31,13 +31,13 @@ bacteria = data[:,2]
 
 rows,col = np.shape(data) 
 
-statStr = np.array(["Mean Temperature","Mean Growth Rate","Std Temperature","Std Growth Rate",
-                    "Rows","Mean Cold Growth Rate","Mean Hot Growth Rate"])
+statStr = np.array(["mean temperature","mean growth rate","std temperature","std growth rate",
+                    "rows","mean cold growth rate","mean hot growth rate"])
 statFlo = np.array([np.mean(temp),np.mean(growth_Rate),np.std(temp),np.std(growth_Rate),
                     rows,np.mean(temp[temp<20]),np.mean(temp[temp>50])])
 
 #array med den efterspurgte statistiske værdi
-expectedStat = ((statStr==statistic)*statFlo)
+expectedStat = ((statStr==statistic.lower())*statFlo)
 
 try:
     result = expectedStat[expectedStat!=0][0]
