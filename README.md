@@ -1,1 +1,1 @@
-Velkommen til vores første programmeringsprojek (for nogle af os)
+Velkommen til vores første programmeringsprojekt (for nogle af os)
