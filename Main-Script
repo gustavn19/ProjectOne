@@ -1,0 +1,144 @@
+#Project 1: Bakterie-Dataanalyse
+
+
+#Imports:
+import numpy as np
+
+
+def dataLoad(filename):
+
+    return data
+
+#s214644; Nikolaj Hertz
+def dataStatistics(data, statistic):
+    """
+    Parameters
+    ----------
+    data: Nx3 matrix with colums temperature, groth rate and bacteria.
+    statistic: required statistical scalar.
+
+    Returns
+    -------
+    Scalar, the result of the statistical measurement.  
+    """
+    temp = data[:,0]
+    growth_Rate = data[:,1]
+    bacteria = data[:,2]
+    errorMsg = 'Wrong input.'
+
+    rows, col = np.shape(data) 
+
+    statStr = np.array(["mean temperature","mean growth rate","std temperature","std growth rate",
+                    "rows","mean cold growth rate","mean hot growth rate"])
+
+    statFlo = np.array([np.mean(temp), np.mean(growth_Rate), np.std(temp), np.std(growth_Rate),
+                    rows, np.mean(temp[temp<20]), np.mean(temp[temp>50])])
+
+    #sikkerhedsnet for hvis parameteren statistic har en udefineret værdi
+    if not np.any((statStr==statistic.lower())):
+        return errorMsg
+
+
+    #array med den efterspurgte statistiske værdi
+    expectedStat = ((statStr==statistic.lower())*statFlo)
+    
+    try:
+        result = expectedStat[expectedStat!=0][0]
+    except IndexError:
+        result = 0.0
+    finally:
+        return result
+
+
+#Data Plot Function Benjamin Bjørn
+#	Grafer
+
+def dataPlot(data):
+    return
+
+
+
+
+quit = False
+filter = False
+
+#Program loop
+while not quit:
+    print(" 1. Load data.\n",
+           "2. Filter data.\n",
+           "3. Display statistics.\n",
+           "4. Generate plots.\n",
+           "5. Quit.\n",
+           "Choose: ")
+    nInput = input()
+    
+    #Sikkerhedsnet for input:
+    try:
+        number = int(nInput)
+    except ValueError:
+        number = 0
+
+
+
+    if number == 1:
+        #dataLoad
+        #print("What is the filename: ")
+        data = testData = np.array([[1,2,3],[2,4,2],[19,20,3],[10,2,1],[30,20,4],[10,20,3],[10,2,1]])
+        rows = 3
+        #file = input()
+        #dataLoad(file)
+
+
+    elif number == 2:
+        #Filter
+        print('1. Filter for Bacteria type.\n',
+              '2. A range filter for Growth Rate.\n'
+              'Choose: ')
+        filterInput = input()
+        #Skkerhedsnet for input:
+        try:
+            filterNumber = int(filterInput)
+        except ValueError:
+            filterNumber = 0
+
+        
+        if filterNumber == 1:
+            print("Limiting data to one bacteria-type. Type which.\n",":")
+            bacteriaInput = input() 
+            print(data)
+            data = np.delete(data,(np.arange(0,rows)[data[:,2]!=int(bacteriaInput)]),0)
+            print(data)
+        elif filterNumber == 2:
+            print("Filter fo growth rate from: ")
+            fromFilter = input()
+            print("to:")
+            toFilter = input()
+
+            data = np.delete(np.delete(data,(np.arange(0,6)[data[:,1]>fromFilter]),0),(np.arange(0,6)[data[:,1]<toFilter]),0)
+        else:
+            print("Wrong input. You must type a number between 1 and 2!")
+
+
+    elif number == 3:
+        #Display Statistics
+        print("What statistic do you want: ")
+        statistic = input()
+        try:
+            output = dataStatistics(data, statistic)
+            print(statistic[0].upper()+statistic[1:].lower(),":",output)
+        except NameError:
+            print("You havn't loaded any data.")
+
+    elif number == 4:
+        #Generate plots
+        dataPlot(data)
+
+
+    elif number == 5:
+        #Qut
+        quit = True
+
+    else:
+        print("Wrong input. You must type a number between 1 and 5!")
+
+
